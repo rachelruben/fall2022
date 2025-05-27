@@ -73,42 +73,24 @@ public class LenientTextUtils {
 		}).collect(Collectors.toList());
 	}
 
-	public static String fromTokens(List<String> tokens, String separator) {
+	public static String toLine(List<String> tokens, String separator) {
 		StringBuilder sb = new StringBuilder();
 		int index = 0;
 		for (String token : tokens) {
 			sb.append(token);
 			++index;
-			if (index < tokens.size()) {
+			if(index < tokens.size()) {
 				sb.append(separator);
 			}
 		}
-		return sb.toString();
-	}
-
-	public static String fromTokens(List<String> tokens) {
-		return fromTokens(tokens, " ");
-	}
-
-	public static String fromlnTokens(List<String> tokens, String separator) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(fromTokens(tokens, separator));
 		sb.append("\n");
 		return sb.toString();
 	}
 
-	public static String fromlnTokens(List<String> tokens) {
-		return fromlnTokens(tokens, " ");
+	public static String toLine(List<String> tokens) {
+		return toLine(tokens, " ");
 	}
-
-	public static String fromlnTokensLists(List<List<String>> tokensLists) {
-		StringBuilder sb = new StringBuilder();
-		for (List<String> tokens : tokensLists) {
-			sb.append(fromlnTokens(tokens));
-		}
-		return sb.toString();
-	}
-
+	
 	private static <N extends Number> List<N> toNumbers(List<String> tokens, Function<String, N> parseNumberFunction) {
 		List<N> result = new ArrayList<>(tokens.size());
 		for (String token : tokens) {
